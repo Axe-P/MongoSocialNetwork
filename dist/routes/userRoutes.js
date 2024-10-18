@@ -65,4 +65,41 @@ router.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({ error: error.message });
     }
 }));
+// POST to add a friend to a user's friend list
+router.post('/:userId/friends/:friendId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('POST request received:', req.params);
+    try {
+        const { userId, friendId } = req.params;
+        // Find the user and add the friend's ID to their friends array
+        const user = yield User_1.default.findByIdAndUpdate(userId, { $addToSet: { friends: friendId } }, // Use $addToSet to prevent duplicates
+        { new: true } // Return the updated user
+        ).populate('thoughts').populate('friends');
+        if (!user) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+        res.json(user);
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}));
+// DELETE to remove a friend from a user's friend list
+router.delete('/:userId/friends/:friendId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { userId, friendId } = req.params;
+        // Find the user and remove the friend's ID from their friends array
+        const user = yield User_1.default.findByIdAndUpdate(userId, { $pull: { friends: friendId } }, // Use $pull to remove the friend's ID
+        { new: true } // Return the updated user
+        ).populate('thoughts').populate('friends');
+        if (!user) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+        res.json(user);
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}));
 exports.default = router;
