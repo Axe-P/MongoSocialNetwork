@@ -26,13 +26,14 @@
 ## Install
 
 ```sh
-Follow these steps to install the project:\n1. Clone the repository.\n2. Run npm install to install dependencies.\n3. Configure the .env file with the necessary MongoDB URI.\n4. Start the server with npm run dev
+Follow these steps to install the project: Clone the repository. Run npm install to install dependencies. Configure the .env file with the necessary MongoDB URI. Start the server with npm run dev
 ```
 
 ## Usage
 
 ```sh
-To test the API, you can use Insomnia or Postman. Here are example API requests:\n- Create a user: POST /api/users\n- Post a thought: POST /api/thoughts\n- Add a friend: POST /api/users/:userId/friends/:friendId\nAdding a screenshot of Insomnia in action could further enhance this section.
+To test the API, you can use Insomnia or Postman. Here are example API requests: -Create a user: POST /api/users -Post a thought: POST /api/thoughts -Add a friend: POST /api/users/:userId/friends/:friendId.
+Watch video for more routes or explore server code for routes.
 ```
 
 ## Run tests
